@@ -2,7 +2,7 @@ PromptCAD
 =========
 
 PromptCAD is a distribution of FreeCAD bundled with the PromptCAD
-natural-language CAD workbench. Copyright (c) 2026 Robb Sharma.
+natural-language CAD workbench. Copyright (c) 2026 Alpha Intel Labs.
 
 
 What this package contains
@@ -27,7 +27,7 @@ What this package contains
 
 2. The PromptCAD workbench (Mod\PromptCAD).
 
-   Copyright (c) 2026 Robb Sharma. Licensed under the MIT License; see
+   Copyright (c) 2026 Alpha Intel Labs. Licensed under the MIT License; see
    Mod\PromptCAD\LICENSE.MD. It is a Python addon that calls FreeCAD's
    public API, distributed alongside FreeCAD rather than linked into it.
 
@@ -43,7 +43,7 @@ What this package contains
 4. PromptCAD.exe, the distribution layer (Mod\PromptCAD\promptcad\distro),
    branding artwork and installer.
 
-   Copyright (c) 2026 Robb Sharma. MIT.
+   Copyright (c) 2026 Alpha Intel Labs. MIT.
 
 No model weights are included in this package. PromptCAD links to models
 published by their respective authors, each under its own licence, and those

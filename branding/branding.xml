@@ -33,7 +33,7 @@
   <BuildVersionMinor>0</BuildVersionMinor>
   <BuildRevision>0</BuildRevision>
 
-  <CopyrightInfo>Copyright (c) 2026 Robb Sharma. Built on FreeCAD, (c) the FreeCAD contributors, LGPL-2.1-or-later.</CopyrightInfo>
+  <CopyrightInfo>Copyright (c) 2026 Alpha Intel Labs. Built on FreeCAD, (c) the FreeCAD contributors, LGPL-2.1-or-later.</CopyrightInfo>
   <MaintainerUrl>https://github.com/revhappy/GPT4FreeCAD</MaintainerUrl>
 
   <!--

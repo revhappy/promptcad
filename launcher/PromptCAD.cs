@@ -19,8 +19,8 @@ using System.Windows.Forms;
 [assembly: AssemblyTitle("PromptCAD")]
 [assembly: AssemblyProduct("PromptCAD")]
 [assembly: AssemblyDescription("Natural-language parametric CAD")]
-[assembly: AssemblyCompany("Robb Sharma")]
-[assembly: AssemblyCopyright("Copyright (c) 2026 Robb Sharma. Built on FreeCAD.")]
+[assembly: AssemblyCompany("Alpha Intel Labs")]
+[assembly: AssemblyCopyright("Copyright (c) 2026 Alpha Intel Labs. Built on FreeCAD.")]
 // AssemblyVersion / AssemblyFileVersion are generated from the VERSION file
 // by build_launcher.ps1, so the exe, the installer and Add/Remove Programs
 // can never disagree about what version this is.

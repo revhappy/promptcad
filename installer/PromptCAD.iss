@@ -22,7 +22,7 @@
 #endif
 
 #define AppName        "PromptCAD"
-#define AppPublisher   "Robb Sharma"
+#define AppPublisher   "Alpha Intel Labs"
 #define AppUrl         "https://github.com/revhappy/GPT4FreeCAD"
 #define AppExe         "PromptCAD.exe"
 
