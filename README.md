@@ -55,6 +55,10 @@ a short hook to the staged `InitGui.py`; upstream never learns it exists.
 - **`shell.py`** — the minimal toolbar layout and the `All tools` toggle
   (Ctrl+Shift+T), re-applied on workbench activation because FreeCAD rebuilds
   the toolbar area every time.
+- **`taskbar.py`** — claims an AppUserModelID so Windows files the window under
+  PromptCAD. Runs synchronously from the InitGui hook, not through `boot.py`,
+  because Windows only honours the ID before the process shows its first
+  window.
 - **`boot.py`** — polls for the main window's event loop, then starts the
   above. Each part is independently guarded.
 
@@ -221,7 +225,20 @@ upstream software this is built on.
   Changing them migrates users to an empty profile, so they are pinned and
   deliberately not tied to the product version.
 
-## Two things that will bite you
+## Three things that will bite you
+
+**The taskbar files windows by process, not by launcher.** `PromptCAD.exe`
+starts `bin\freecad.exe` and exits, so the window belongs to freecad.exe — and
+with no explicit identity Windows derives one from that process's path. The
+taskbar button therefore grouped under FreeCAD, and "Pin to taskbar" pinned
+**freecad.exe**: a pin wearing FreeCAD's icon that launched stock FreeCAD when
+clicked. The fix is an AppUserModelID declared in two places that must agree,
+and neither works alone — `overlay\promptcad\distro\taskbar.py` claims it on
+the running process, and `installer\PromptCAD.iss` stamps the same string on
+every shortcut. Keep the ID stable forever: it is the key Windows stores pins
+and jump lists against, so changing it orphans every pin a user has made.
+
+
 
 **Branding image paths resolve against the install root**, not against
 `branding.xml`'s own directory and not against the working directory. With

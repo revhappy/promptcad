@@ -134,6 +134,18 @@ BOOT_HOOK = '''
 
 # --- PromptCAD distribution layer (appended by the PromptCAD build) ---
 # Not part of the upstream addon; see promptcad/distro/__init__.py.
+
+# First, and synchronously: Windows only honours an AppUserModelID before the
+# process shows its first window, so this cannot wait for boot's timer. It is
+# what stops the taskbar filing our window under freecad.exe.
+try:
+    from promptcad.distro import taskbar as _promptcad_taskbar
+    _promptcad_problem = _promptcad_taskbar.install()
+    if _promptcad_problem:
+        FreeCAD.Console.PrintWarning(_promptcad_problem + "\\n")
+except Exception as exc:
+    FreeCAD.Console.PrintWarning(f"PromptCAD taskbar identity unavailable: {exc}\\n")
+
 try:
     from promptcad.distro import boot as _promptcad_boot
     _promptcad_boot.install()

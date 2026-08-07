@@ -26,6 +26,13 @@
 #define AppUrl         "https://github.com/revhappy/GPT4FreeCAD"
 #define AppExe         "PromptCAD.exe"
 
+; Must match APP_ID in overlay\promptcad\distro\taskbar.py exactly, and must
+; stay stable forever. PromptCAD.exe launches bin\freecad.exe and exits, so the
+; window belongs to freecad.exe; without a shared identity on both sides,
+; Windows groups that window under FreeCAD and "Pin to taskbar" pins FreeCAD.
+; Changing this orphans every pin and jump list a user has already made.
+#define AppUserModelID "AlphaIntelLabs.PromptCAD"
+
 [Setup]
 ; Keep this GUID stable forever: it is how Windows recognises an upgrade
 ; rather than a second parallel installation.
@@ -85,9 +92,17 @@ Source: "{#StageDir}\*"; DestDir: "{app}"; \
     Flags: recursesubdirs createallsubdirs ignoreversion
 
 [Icons]
-Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExe}"
+; AppUserModelID on the launcher shortcuts is half of the taskbar fix - the
+; running process claims the same ID from promptcad\distro\taskbar.py. With
+; both in place Windows resolves our window to these shortcuts, so pinning
+; pins PromptCAD (and its icon) instead of the bundled freecad.exe.
+; The licences entry points at a folder, which has no app identity, so it is
+; deliberately left off that one.
+Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExe}"; \
+    AppUserModelID: "{#AppUserModelID}"
 Name: "{group}\{#AppName} licences"; Filename: "{app}\legal"
-Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopicon
+Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; \
+    AppUserModelID: "{#AppUserModelID}"; Tasks: desktopicon
 
 [Registry]
 Root: HKA; Subkey: "Software\Classes\.FCStd\OpenWithProgids"; \
