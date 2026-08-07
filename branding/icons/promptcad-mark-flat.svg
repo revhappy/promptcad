@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="PromptCAD">
+  <!--
+    Flat mark: "> _" on transparency, no plate, no cube, no extrusion.
+    This is the in-app variant (workbench selector, toolbar) and the source
+    for the .ico's 16-32px frames, where anything more turns to mud.
+
+    Laid out side by side rather than stacked so the art fills a square icon
+    box, and stroked heavily enough to hold on a light or dark FreeCAD theme.
+  -->
+  <g transform="translate(-6 8)">
+    <path d="M58 66 L128 120 L58 174" fill="none" stroke="#38BDF8"
+          stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M154 176 L216 176" fill="none" stroke="#F59E0B"
+          stroke-width="28" stroke-linecap="round"/>
+  </g>
+</svg>

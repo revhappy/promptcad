@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="All tools">
+  <!-- "Show all tools": a full grid, versus the single pane of minimal mode. -->
+  <rect x="9"  y="9"  width="19" height="19" rx="4" fill="#38BDF8"/>
+  <rect x="36" y="9"  width="19" height="19" rx="4" fill="#0369A1"/>
+  <rect x="9"  y="36" width="19" height="19" rx="4" fill="#0369A1"/>
+  <rect x="36" y="36" width="19" height="19" rx="4" fill="#F59E0B"/>
+</svg>

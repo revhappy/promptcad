@@ -1,0 +1,23 @@
+# Build output
+dist/
+branding/generated/
+launcher/generated/
+
+# Downloaded llama.cpp release + its unpacked binaries. build.ps1 fetches
+# these on demand and falls back to downloading at first use, so they are a
+# cache, not a source.
+.cache/
+
+# Model weights. None ship with PromptCAD; see the Models section of the
+# README for where to get them.
+*.gguf
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

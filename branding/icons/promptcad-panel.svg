@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="PromptCAD panel">
+  <!-- Toolbar/menu icon for "open the panel": the prompt inside a dock frame. -->
+  <rect x="6.5" y="6.5" width="51" height="51" rx="10"
+        fill="none" stroke="#0369A1" stroke-width="4.5"/>
+  <path d="M24 20 L40 32 L24 44" fill="none" stroke="#38BDF8"
+        stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,73 @@
+PromptCAD
+=========
+
+PromptCAD is a distribution of FreeCAD bundled with the PromptCAD
+natural-language CAD workbench. Copyright (c) 2026 Robb Sharma.
+
+
+What this package contains
+--------------------------
+
+1. FreeCAD, redistributed VERBATIM and UNMODIFIED.
+
+   Copyright (c) the FreeCAD contributors.
+   Licensed under the GNU Lesser General Public License, version 2.1 or
+   later (LGPL-2.1-or-later).
+
+   The full licence text is in legal\FreeCAD-LICENSE.html and the complete
+   list of FreeCAD's own third-party dependencies - including OpenCASCADE,
+   Qt, Coin3D, Python and others - is in
+   legal\FreeCAD-ThirdPartyLibraries.html.
+
+   PromptCAD does not patch, recompile or otherwise alter any FreeCAD
+   binary. The PromptCAD name, icon and splash screen come from
+   bin\branding.xml, a configuration file that FreeCAD itself reads and
+   supports for exactly this purpose. Deleting that file returns the
+   application to stock FreeCAD appearance.
+
+2. The PromptCAD workbench (Mod\PromptCAD).
+
+   Copyright (c) 2026 Robb Sharma. Licensed under the MIT License; see
+   Mod\PromptCAD\LICENSE.MD. It is a Python addon that calls FreeCAD's
+   public API, distributed alongside FreeCAD rather than linked into it.
+
+3. llama.cpp (backend\llama-server.exe and its libraries).
+
+   Copyright (c) 2023-2026 The ggml authors.
+   Licensed under the MIT License.
+   Source: https://github.com/ggml-org/llama.cpp
+
+   Redistributed as an unmodified upstream release build. PromptCAD uses it to
+   run local GGUF models so that no download is needed on first use.
+
+4. PromptCAD.exe, the distribution layer (Mod\PromptCAD\promptcad\distro),
+   branding artwork and installer.
+
+   Copyright (c) 2026 Robb Sharma. MIT.
+
+No model weights are included in this package. PromptCAD links to models
+published by their respective authors, each under its own licence, and those
+licences govern your use of them. See https://alphaintellabs.com/promptcad.
+
+
+Your rights under the LGPL
+--------------------------
+
+Because FreeCAD is licensed under the LGPL, you are entitled to obtain its
+complete source code and to replace the bundled FreeCAD and Qt libraries
+with your own versions. See legal\SOURCE-OFFER.txt for how to get the
+source. The libraries in this package are dynamically linked and can be
+substituted in place.
+
+
+Trademarks
+----------
+
+FreeCAD is a trademark of the FreeCAD Project Association.
+
+PromptCAD is an independent project. It is NOT affiliated with, endorsed
+by, or supported by the FreeCAD Project Association or the FreeCAD
+contributors. The FreeCAD name is used here only to identify the upstream
+software this package is built on, as its licence requires.
+
+Please report PromptCAD problems to PromptCAD, not to the FreeCAD project.

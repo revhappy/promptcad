@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PromptCAD branding.
+
+  FreeCAD reads this file from the directory holding freecad.exe and applies
+  it at startup. It is a documented configuration hook, NOT a patch: no
+  FreeCAD binary is modified, which keeps the bundle on the safe side of
+  LGPL-2.1 (we distribute FreeCAD verbatim and add our own files alongside).
+
+  The installer copies this to <install>\bin\branding.xml, next to the
+  generated PNGs it references. PromptCAD.exe sets the working directory to
+  that folder so the relative paths below resolve.
+
+  Keys here are the ones FreeCAD 1.1 actually reads - verified against the
+  string table in FreeCADApp.dll. Unknown keys are ignored silently, so do
+  not invent new ones and expect them to work.
+-->
+<Branding>
+  <Application>PromptCAD</Application>
+  <ExeName>PromptCAD</ExeName>
+  <WindowTitle>PromptCAD</WindowTitle>
+
+  <!--
+    This is the PROFILE version, not the product version, and it must stay
+    pinned. FreeCAD derives the user data directory from it: at 2 and 8 the
+    profile landed in %APPDATA%\PromptCAD\v2-8\, so shipping 2.9 would have
+    stranded every user's API keys and preferences in the old folder.
+
+    The real product version lives in the installer and in PromptCAD.exe's
+    version resource, where bumping it costs nothing.
+  -->
+  <BuildVersionMajor>1</BuildVersionMajor>
+  <BuildVersionMinor>0</BuildVersionMinor>
+  <BuildRevision>0</BuildRevision>
+
+  <CopyrightInfo>Copyright (c) 2026 Robb Sharma. Built on FreeCAD, (c) the FreeCAD contributors, LGPL-2.1-or-later.</CopyrightInfo>
+  <MaintainerUrl>https://github.com/revhappy/GPT4FreeCAD</MaintainerUrl>
+
+  <!--
+    Image paths resolve against the INSTALL ROOT (AppHomePath), not against
+    this file's directory and not against the working directory. Verified the
+    hard way: with bare filenames next to branding.xml in bin\, FreeCAD found
+    nothing and silently fell back to its own red "F" icon - no warning, no
+    log line. Keep the bin/ prefix.
+  -->
+  <WindowIcon>bin/promptcad-window.png</WindowIcon>
+  <ProgramLogo>bin/promptcad-logo.png</ProgramLogo>
+
+  <SplashScreen>bin/promptcad-splash.png</SplashScreen>
+  <SplashAlignment>Bottom|Left</SplashAlignment>
+  <SplashTextColor>#F8FAFC</SplashTextColor>
+  <SplashInfoColor>#94A3B8</SplashInfoColor>
+
+  <!-- Open straight into the prompt instead of FreeCAD's Start page. -->
+  <StartWorkbench>PromptCADWorkbench</StartWorkbench>
+</Branding>

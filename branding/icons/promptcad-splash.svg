@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" role="img" aria-label="PromptCAD">
+  <!--
+    Splash artwork, graphics only.
+
+    The wordmark and tagline are NOT in this file: Qt's offscreen platform
+    ships no fonts, so <text> here rasterises to tofu boxes. build_icons.py
+    loads Segoe UI explicitly and paints the type over this image instead.
+
+    FreeCAD paints its own version/progress text at the alignment given by
+    <SplashAlignment> in branding.xml, which we set to Bottom|Left - so the
+    lower-left quadrant is deliberately left empty.
+  -->
+  <defs>
+    <linearGradient id="plate" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="400">
+      <stop offset="0" stop-color="#16223B"/>
+      <stop offset="1" stop-color="#080D18"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="400" fill="url(#plate)"/>
+
+  <!-- Construction-geometry watermark, bled off the right edge. -->
+  <g fill="none" stroke="#1E3252" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+     transform="translate(430 10) scale(1.15)">
+    <path d="M128 36 L211 84 L211 180 L128 228 L45 180 L45 84 Z"/>
+    <path d="M128 132 L45 84"/>
+    <path d="M128 132 L211 84"/>
+    <path d="M128 132 L128 228"/>
+  </g>
+
+  <!-- The mark, scaled down from the 256 master grid. -->
+  <g transform="translate(37 126) scale(0.5)">
+    <path d="M58 66 L128 120 L58 174" fill="none" stroke="#38BDF8"
+          stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M154 176 L216 176" fill="none" stroke="#F59E0B"
+          stroke-width="28" stroke-linecap="round"/>
+  </g>
+</svg>

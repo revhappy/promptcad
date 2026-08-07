@@ -1,0 +1,54 @@
+Written Offer for Source Code
+=============================
+
+This package includes FreeCAD, which is licensed under the GNU Lesser
+General Public License version 2.1 or later, and Qt, which is licensed
+under the GNU Lesser General Public License version 3. Both licences give
+you the right to the corresponding source code.
+
+
+FreeCAD
+-------
+
+The FreeCAD binaries in this package are byte-for-byte the official
+upstream release. Nothing was patched, rebuilt or removed, so the
+corresponding source is the upstream source for the bundled version:
+
+    Version : see Help > About in the application, or bin\FreeCADApp.dll
+    Source  : https://github.com/FreeCAD/FreeCAD
+    Licence : LGPL-2.1-or-later (legal\FreeCAD-LICENSE.html)
+
+Release tarballs and the exact tag for each release are published at
+https://github.com/FreeCAD/FreeCAD/releases.
+
+
+Qt and other bundled libraries
+------------------------------
+
+The bundled Qt libraries are unmodified upstream builds, available from
+https://download.qt.io. Every other bundled dependency, with its licence
+and origin, is listed in legal\FreeCAD-ThirdPartyLibraries.html.
+
+All of these are dynamically linked. You may replace any of them with your
+own build and continue to use this application, which is the right LGPL
+section 6 is there to protect.
+
+
+The PromptCAD workbench
+-----------------------
+
+Not required to be offered - it is MIT licensed - but it is public anyway:
+
+    https://github.com/revhappy/GPT4FreeCAD
+
+
+If you would rather be sent the source
+--------------------------------------
+
+For three years from the date you received this package, we will provide a
+complete machine-readable copy of the corresponding source for any LGPL
+component in it, on a physical medium or by download link, for no more
+than our cost of distribution.
+
+Write to: alphaintellabs@gmail.com with the subject "PromptCAD source
+request", stating which component and which version you received.
