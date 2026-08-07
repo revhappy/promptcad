@@ -54,6 +54,37 @@ function Write-Step([string] $Text) {
     Write-Host "==> $Text" -ForegroundColor Cyan
 }
 
+function Invoke-Native {
+    <#
+    .SYNOPSIS
+        Run an external program and fail on its exit code, not on its stderr.
+
+    .DESCRIPTION
+        Windows PowerShell 5.1 wraps every stderr line from a native command in
+        an ErrorRecord, and with $ErrorActionPreference = 'Stop' that aborts the
+        script even when the program returned 0. FreeCAD's bundled Python emits
+        "QFontDatabase: Cannot find font directory ..." on startup, which killed
+        the whole build at the icon step of a run that was otherwise fine.
+
+        A warning on stderr is not a failure. The exit code is, so that is what
+        is checked here.
+    #>
+    param(
+        [Parameter(Mandatory)] [string] $What,
+        [Parameter(Mandatory)] [string] $FilePath,
+        [string[]] $Arguments = @()
+    )
+
+    $previous = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        & $FilePath @Arguments 2>&1 | ForEach-Object { Write-Host "  $_" }
+    } finally {
+        $ErrorActionPreference = $previous
+    }
+    if ($LASTEXITCODE -ne 0) { throw "$What failed ($LASTEXITCODE)" }
+}
+
 # --------------------------------------------------------------------------
 # Preflight
 # --------------------------------------------------------------------------
@@ -96,8 +127,8 @@ New-Item -ItemType Directory -Path $Out -Force | Out-Null
 # 1. Artwork
 # --------------------------------------------------------------------------
 Write-Step 'Rendering icons'
-& $python (Join-Path $branding 'build_icons.py')
-if ($LASTEXITCODE -ne 0) { throw "build_icons.py failed ($LASTEXITCODE)" }
+Invoke-Native -What 'build_icons.py' -FilePath $python `
+    -Arguments @((Join-Path $branding 'build_icons.py'))
 
 # --------------------------------------------------------------------------
 # 2. Launcher
@@ -177,12 +208,13 @@ foreach ($name in $dropFiles) {
 # 4. Rebranded addon
 # --------------------------------------------------------------------------
 Write-Step 'Rebranding the addon into stage\Mod\PromptCAD'
-& $python (Join-Path $PSScriptRoot 'rebrand.py') `
-    --source $Addon `
-    --dest (Join-Path $stage 'Mod\PromptCAD') `
-    --branding $branding `
-    --overlay (Join-Path $root 'overlay')
-if ($LASTEXITCODE -ne 0) { throw "rebrand.py failed ($LASTEXITCODE)" }
+Invoke-Native -What 'rebrand.py' -FilePath $python -Arguments @(
+    (Join-Path $PSScriptRoot 'rebrand.py')
+    '--source'; $Addon
+    '--dest'; (Join-Path $stage 'Mod\PromptCAD')
+    '--branding'; $branding
+    '--overlay'; (Join-Path $root 'overlay')
+)
 
 # --------------------------------------------------------------------------
 # 4b. Inference backend
@@ -315,10 +347,13 @@ Install Inno Setup and re-run to get the installer:
         if ($MaxCompression) { $mode = 'lzma2/max' }
         Write-Host "  compression: $mode"
 
-        & $iscc "/DAppVersion=$version" "/DStageDir=$stage" `
-            "/DCompressionMode=$mode" "/O$Out" `
+        Invoke-Native -What 'ISCC' -FilePath $iscc -Arguments @(
+            "/DAppVersion=$version"
+            "/DStageDir=$stage"
+            "/DCompressionMode=$mode"
+            "/O$Out"
             (Join-Path $root 'installer\PromptCAD.iss')
-        if ($LASTEXITCODE -ne 0) { throw "ISCC failed ($LASTEXITCODE)" }
+        )
     }
 }
 
