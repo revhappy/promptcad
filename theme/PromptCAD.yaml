@@ -1,0 +1,135 @@
+# PromptCAD — colour tokens for FreeCAD's stylesheet engine.
+#
+# FreeCAD 1.x does not hard-code colours into FreeCAD.qss. The stylesheet is
+# written against @Variable tokens and the *theme* supplies their values from a
+# file like this one, which is why a whole-application recolour costs a palette
+# rather than a fork of a 2,700-line stylesheet.
+#
+# Every key FreeCAD Dark defines is defined here too. A token the stylesheet
+# asks for and the theme does not answer is not substituted, and the literal
+# text "@GroupboxBorderColor" ends up in a CSS property, where Qt discards the
+# whole rule - so the omission shows up as one randomly unstyled widget rather
+# than as an error. Keep this list complete when FreeCAD adds a token.
+#
+# Every value here is #rrggbb. FreeCAD's darken()/blend() helpers parse that
+# and nothing else, and a token it cannot parse takes the whole stylesheet down
+# with it - the application falls back to raw Qt chrome, which is grey boxes
+# and square corners. Translucency is therefore *composited by hand*: each
+# "glass" tone below is the rgba wash it represents already flattened onto the
+# ground it sits on. Qt has no backdrop blur, so on a known background this is
+# what the real thing would have looked like anyway.
+
+# ── Ground ──────────────────────────────────────────────────────────────────
+# Neutral near-black, very slightly cool. Not blue: a saturated ground fights
+# every colour the application needs to put on top of it - selection, syntax,
+# constraint state - and it is the one surface the eye rests on all day.
+#
+# Contrast is deliberately not maximised. #E4E4E7 on #141416 is about 14:1,
+# where pure white would be 18:1; on a large dark field that last stop is what
+# reads as glare rather than as clarity.
+PrimaryColor: "#141416"
+PrimaryColorDarken1: "#101012"
+PrimaryColorDarken2: "#0C0C0E"
+PrimaryColorDarken3: "#0A0A0C"
+PrimaryColorDarken4: "#08080A"
+PrimaryColorDarken5: "#050506"
+PrimaryColorDarken6: "#000000"
+PrimaryColorLighten1: "#1B1B1E"
+PrimaryColorLighten2: "#212125"
+PrimaryColorLighten3: "#26262B"
+PrimaryColorLighten4: "#2D2D33"
+PrimaryColorLighten5: "#3A3A42"
+PrimaryColorLighten6: "#4A4A54"
+
+# ── Text ────────────────────────────────────────────────────────────────────
+TextForegroundColor: "#E4E4E7"
+TextDisabledColor: "#87878F"
+TextEditFieldBackgroundColor: "#101012"
+TextSelectBackgroundColor: "#1C3C4E"
+TextUrlColor: "@AccentColor"
+
+# ── Accent ──────────────────────────────────────────────────────────────────
+# One accent, used sparingly, on a neutral ground - which is what keeps it
+# looking engineered rather than decorated. ThemeAccentColor1 is a preference,
+# not a constant, so changing it in Preferences recolours the theme.
+AccentColor: "@ThemeAccentColor1"
+AccentBackgroundColor: "#1C3C4E"
+AccentHoverColor: "#22485D"
+
+# ── Surfaces ────────────────────────────────────────────────────────────────
+GeneralBackgroundColor: "@PrimaryColor"
+GeneralBackgroundHoverColor: "@PrimaryColorLighten2"
+GeneralAlternateBackgroundColor: "@PrimaryColorLighten1"
+GeneralDisabledBackgroundColor: "@PrimaryColorDarken1"
+GeneralHeaderBackgroundColor: "@PrimaryColorLighten1"
+DialogBackgroundColor: "@PrimaryColorLighten1"
+MenuBackgroundColor: "@PrimaryColorLighten1"
+GroupboxBackgroundColor: "@PrimaryColorLighten1"
+ScrollbarBackgroundColor: "@PrimaryColorDarken1"
+
+# ── Lines ───────────────────────────────────────────────────────────────────
+# Hairlines, lighter than the ground rather than darker. On glass the edge is
+# the only thing telling you a control is there, so it wants to be visible and
+# thin. Darkening a ground this deep gives black on near-black and every panel
+# edge disappears.
+GeneralBorderColor: "#2A2A2F"
+GeneralBorderHoverColor: "#3D3D45"
+GeneralGridLinesColor: "#232328"
+GroupboxBorderColor: "@GeneralBorderColor"
+
+# ── Controls ────────────────────────────────────────────────────────────────
+# Flat, not bevelled. FreeCAD.qss paints a button as a top-to-bottom gradient
+# between these two tokens, so setting them equal is how the bevel is turned
+# off without touching the stylesheet - and a flat tile one step off the ground
+# with a hairline edge is the iOS-style surface: lit by where it sits rather
+# than painted its own opaque grey.
+ButtonTopBackgroundColor: "#1F1F23"
+ButtonBottomBackgroundColor: "#1F1F23"
+ButtonBackgroundHooverColor: "#2A2A30"
+ButtonBorderColor: "@GeneralBorderColor"
+ButtonBorderHooverColor: "@GeneralBorderHoverColor"
+CheckedButtonTopBackgroundColor: "#16323F"
+CheckedButtonBottomBackgroundColor: "#16323F"
+DefaultButtonTopBackgroundColor: "#152B37"
+DefaultButtonBottomBackgroundColor: "#152B37"
+DefaultButtonBorderColor: "#2A5C76"
+
+# The active tool reads as a tinted tile, not a pressed grey button.
+ToolButtonCheckedBackground: "#16323F"
+ToolButtonCheckedBorderColor: "#2A5C76"
+
+CheckBoxBackgroundColor: "#1F1F23"
+CheckBoxBorderColor: "@GeneralBorderColor"
+RadioButtonBackgroundColor: "@CheckBoxBackgroundColor"
+RadioButtonBorderColor: "@GeneralBorderColor"
+
+# ── Tabs ────────────────────────────────────────────────────────────────────
+TabbarBackgroundColor: "@PrimaryColorDarken1"
+InActiveTabBackgroundColor: "#191919"
+ActiveTabBackgroundColor: "@PrimaryColorLighten2"
+
+# ── Metrics ─────────────────────────────────────────────────────────────────
+# iOS-scale corners. FreeCAD's 3px reads as a chamfered Windows control; 8px is
+# the radius that makes a flat tile look deliberate rather than merely square.
+InputFieldBorderRadius: "8px"
+ToolbarButtonsPadding: "4px"
+IconsLocationFolderName: "images_classic"
+StylesheetIconsColor: "white"
+
+# The 3D view is painted by the view provider, not the stylesheet; this token
+# only tells the stylesheet what colour to sit against. Keep it equal to the
+# View/BackgroundColor the preference pack sets, or docked overlays will not
+# match the viewport they float over.
+3DViewBackgroundRefColor: "#0E0E10"
+
+# ── Sketcher ────────────────────────────────────────────────────────────────
+# Left as FreeCAD ships them. These are not decoration: users read constraint
+# state by colour, and that vocabulary is worth more than matching our palette.
+SketcherConflictingConstraintsColor: "#fc6c6c"
+SketcherEmptySketchColor: "#ffffff"
+SketcherFullyConstrainedColor: "#8cff5b"
+SketcherMalformedConstraintsColor: "#fc6c6c"
+SketcherPartiallyRedundantConstraintsColor: "#77cbff"
+SketcherRedundantConstraintsColor: "#ffa256"
+SketcherSolverFailedColor: "#ff9090"
+SketcherUnderConstrainedColor: "#ffffff"

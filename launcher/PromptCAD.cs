@@ -42,8 +42,13 @@ internal static class PromptCadLauncher
     // greys do not match the rest of the app. Preference packs are ordinary
     // FCParameters documents - the same shape as user.cfg - so a pack file
     // simply *is* a valid starting profile.
+    //
+    // PromptCAD's own pack, built by build\theme.py from FreeCAD's dark one.
+    // It carries the palette, the sky accent and the 3D view colours, so the
+    // application opens looking like the product rather than like a FreeCAD
+    // that has been repainted a moment after the user could see it.
     private const string ThemePack =
-        @"data\Gui\PreferencePacks\FreeCAD Dark\FreeCAD Dark.cfg";
+        @"data\Gui\PreferencePacks\PromptCAD\PromptCAD.cfg";
 
     [STAThread]
     private static int Main(string[] args)

@@ -102,6 +102,13 @@ def _try_start() -> None:
     except Exception as exc:
         _warn(f"PromptCAD could not apply its window layout: {exc}")
 
+    try:
+        from . import grid
+
+        grid.install()
+    except Exception as exc:
+        _warn(f"PromptCAD could not draw its grid: {exc}")
+
 
 def _stop_timer() -> None:
     global _timer

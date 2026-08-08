@@ -277,6 +277,18 @@ on first use of a local model instead.
 }
 
 # --------------------------------------------------------------------------
+# 4c. Theme
+# --------------------------------------------------------------------------
+# Must run after the FreeCAD payload is staged: the pack is derived from
+# FreeCAD's own dark one rather than vendored, so the source has to be on disk.
+Write-Step 'Building the PromptCAD theme'
+Invoke-Native -What 'theme.py' -FilePath $python -Arguments @(
+    (Join-Path $PSScriptRoot 'theme.py')
+    '--stage'; $stage
+    '--palette'; (Join-Path $root 'theme\PromptCAD.yaml')
+)
+
+# --------------------------------------------------------------------------
 # 5. Branding, launcher and licences
 # --------------------------------------------------------------------------
 Write-Step 'Applying branding'
